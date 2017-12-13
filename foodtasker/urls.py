@@ -4,6 +4,7 @@ from foodtaskerapp import views
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -16,5 +17,10 @@ urlpatterns = [
         name = 'restaurant-sign-out'),
     url(r'^restaurant/sign-up/$', views.restaurant_sign_up,
         name = 'restaurant-sign-up'),
-    url(r'^restaurant/$', views.restaurant_home, name = 'restaurant-home')
+    url(r'^restaurant/$', views.restaurant_home, name = 'restaurant-home'),
+
+    #Sign In/Sign Up/ Sign Out
+    url(r'^api/social/', include('rest_framework_social_oauth2.urls')),
+
+    #Convert Token
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
